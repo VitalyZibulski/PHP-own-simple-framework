@@ -31,9 +31,14 @@
                 //Validate email
                 if (empty($data['email'])) {
                     $data['email_err'] = 'Please enter email';
+                } else {
+                    // Check email
+                    if($this->userModel->findUserByEmail($data['email'])){
+                        $data['email_err'] = 'Email is already taken';
+                    }
                 }
 
-                //Validate email
+                //Validate name
                 if (empty($data['name'])) {
                     $data['name_err'] = 'Please enter name';
                 }
