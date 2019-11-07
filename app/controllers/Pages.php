@@ -1,0 +1,30 @@
+<?php
+
+    class Pages extends Controller
+    {
+        public function __construct()
+        {
+
+        }
+
+        public function index()
+        {
+
+            $data = [
+                'title' => 'SharePosts',
+                'description' => 'Simple social network built on the MVC PHP framefork'
+            ];
+
+            $this->view('pages/index', $data); // ['title' => 'Welcome']
+        }
+
+        public function about()
+        {
+            $data = [
+                'title' => 'About Us',
+                'description' => 'App to share posts with other users'
+            ];
+
+            $this->view('pages/about', $data);
+        }
+    }
