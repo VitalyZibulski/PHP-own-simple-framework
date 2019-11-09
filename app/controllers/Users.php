@@ -64,7 +64,7 @@
                     empty($data['confirm_password_err'])) {
                     // Validated
 
-                    // HAsh Password
+                    // Hash Password
                     $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
                     //Register User
@@ -123,9 +123,29 @@
                     $data['password_err'] = 'Please enter password';
                 }
 
+                // Check for user/email
+                if($this->userModel->findUserByEmail($data['email'])){
+                    // User found
+                } else {
+                    // User not found
+                    $data['email_err'] = 'No user found';
+                }
+
                 // Make sure errors are empty
                 if (empty($data['email_err']) && empty($data['password_err'])) {
-                    die('1111111');
+                    // Validated
+                    // Check and set logged in user
+                    $loggedUser = $this->userModel->login($data['email'], $data['password']);
+
+                    if($loggedUser) {
+                        // Create Session
+                        die('Log in');
+                    } else {
+                        $data['password_err'] = 'Password incorrect';
+
+                        $this->view('users/login', $data);
+                    }
+
                 } else {
                     // Load view with errors
                     $this->view('users/login', $data);
