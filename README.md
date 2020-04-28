@@ -1,2 +1,1 @@
-# PHP-framework-project
-PHP own simple framework
+# PHP own simple framework
